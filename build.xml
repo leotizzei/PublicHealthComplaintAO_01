@@ -1,0 +1,115 @@
+<project name="PublicHealthComplaint-SPL" default="PHC-aspectj" basedir=".">
+	
+	<!-- THE HEALTH WATCHER VERSION BEING COMPILED  -->
+	
+	<property name="PHCVersion"		value="01"/>
+
+
+	<!-- SYSTEM DEPENDENT VARIABLES - CHANGE FOR YOUR NEEDS  -->
+	<property name="app.name"		value="PHC-v01"/>
+	<property name="compile.dir"	value="tmp"/> 
+	<property name="jars.dir"		value="tmp"/>
+	<property name="classes.dir"	value="tmp/classes"/>
+	<property name="bin.dir"		value="bin"/>
+	<property name="aspectj.dir"	value="../PublicHealthComplaintAO_${PHCVersion}"/>
+	<property name="jboss.dir"		value="deploy"/>
+	<property name="tomcat.dir"		value="/opt/tomcat/webapps"/>
+	<property name="lib.dir"		value="lib"/>
+	
+	<!-- CLASSPATH FOR COMPILATION AND TASKS -->
+	<path id="classpath">
+		<fileset dir="lib"> 
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+ 
+	<!-- TASK DEFINITIONS -->
+	<taskdef name="ajc" classname="org.aspectj.tools.ant.taskdefs.AjcTask">
+		<classpath refid="classpath"/>
+	</taskdef>
+	
+	<!-- CREATE NEEDED DIRECTORIES -->
+	<target name="prepare">
+		<mkdir  dir="${jars.dir}"/>
+		<mkdir  dir="${compile.dir}"/>
+		<mkdir  dir="${compile.dir}/classes"/>  
+		<mkdir  dir="${compile.dir}/ear/META-INF"/>
+		<mkdir  dir="${compile.dir}/war/WEB-INF/lib"/>
+		<mkdir  dir="${compile.dir}/war/rss"/>
+	</target>
+	
+	<!-- CLEANUP -->
+	<target name="clean">
+		<delete dir="${classes.dir}"/>
+		<delete dir="${jars.dir}"/>
+	</target>
+	
+	<target name="compile-aspectj" depends="clean, prepare">
+		<ajc srcdir="${aspectj.dir}/src" destdir="${compile.dir}/classes" source="1.4"> 
+			<classpath refid="classpath"/>
+		</ajc>	  	
+	</target>
+	
+
+	<!-- BUILDING -->
+	<target name="copy-resources">
+		<copy file="conf/META-INF/PHC/application.xml" tofile="${compile.dir}/ear/META-INF/application.xml"/>
+		<copy file="conf/WEB-INF/PHC/web.xml" tofile="${compile.dir}/war/WEB-INF/web.xml"/>
+		<copy file="conf/WEB-INF/PHC/jboss-web.xml" tofile="${compile.dir}/war/WEB-INF/jboss-web.xml"/>
+		<copy file="conf/rss/phcfeeds.xml" tofile="${compile.dir}/war/rss/phcfeeds.xml"/>
+		<copy todir="${compile.dir}/war/">
+			<fileset dir="web/publichealthcomplaint/forms"/>    
+		</copy>
+		<copy todir="${compile.dir}/war/lib/">
+			<fileset dir="${lib.dir}"/>    
+		</copy>
+	</target>
+	
+	<target name="rmi">
+		<rmic classname="publichealthcomplaint.rmiconnector.HealthWatcherFacade" base="${compile.dir}/classes"/>
+	</target>
+	
+	<target name="rmic">
+		<cjrmic base="${compile.dir}/classes" verbose="true"> 
+			<classpath>
+				<pathelement path="${compile.dir}/classes"/>
+				<pathelement path="${java.home}/lib/rt.jar"/>
+				<fileset dir="lib"> 
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
+			<classname value="publichealthcomplaint.rmiconnector.HealthWatcherFacade"/>
+			<echo message="Classpath =${classpath}"/>
+		</cjrmic>
+	</target>
+
+	<target name="build-aspectj" depends="compile-aspectj, copy-resources, rmi"/>
+	
+	<!-- PACKAGING -->
+	<target name="jar">
+		<jar jarfile="${jars.dir}/phc-basic.jar">
+			<fileset dir="${compile.dir}/classes">
+				<include name="**" />      	
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="war" depends="jar">
+		<copy  file="${jars.dir}/phc-basic.jar" tofile="${compile.dir}/war/WEB-INF/lib/phc-basic.jar"/>
+		<!-- copy  file="./hw_ao_01.jar" tofile="${compile.dir}/war/WEB-INF/lib/healthwatcher-basic.jar"/ --> 
+		<jar jarfile="${jars.dir}/${app.name}.war" basedir = "${compile.dir}/war" includes="**"/>
+	</target>
+	
+	<target name="ear" depends="war">
+		<copy file="${jars.dir}/${app.name}.war" tofile="${compile.dir}/ear/${app.name}.war"/>
+		<jar jarfile="${jars.dir}/${app.name}.ear" basedir = "${compile.dir}/ear" includes="**"/>
+		<delete dir="${compile.dir}/ear"/>
+	</target>
+	
+
+	
+	<!-- SYSTEMS -->
+	<target name="PHC-aspectj" depends="build-aspectj, jar, war"/>
+
+	<target name="stop-to-work" depends=""/>
+</project>
