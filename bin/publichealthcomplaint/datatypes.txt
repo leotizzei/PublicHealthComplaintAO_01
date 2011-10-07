@@ -1,4 +1,0 @@
-import publichealthcomplaint.exceptionhandling.impl.InvalidDateException;
-import publichealthcomplaint.exceptionhandling.impl.InvalidDateException;
-	public static final String FORM_PATH = "/home/leonardo/workspace3/PublicHealthComplaintAO_01/web/publichealthcomplaint/forms/first/";
-	public static final String SERVLET_SERVER_PATH = "localhost:8080/PHC-v01/publichealthcomplaint.userinterface.impl.";

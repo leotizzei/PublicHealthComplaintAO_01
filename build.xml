@@ -13,7 +13,7 @@
 	<property name="bin.dir"		value="bin"/>
 	<property name="aspectj.dir"	value="../PublicHealthComplaintAO_${PHCVersion}"/>
 	<property name="jboss.dir"		value="deploy"/>
-	<property name="tomcat.dir"		value="/opt/tomcat/webapps"/>
+	<property name="tomcat.dir"		value="$HOME/tomcat/webapps"/>
 	<property name="lib.dir"		value="lib"/>
 	
 	<!-- CLASSPATH FOR COMPILATION AND TASKS -->
@@ -63,6 +63,9 @@
 		<copy todir="${compile.dir}/war/lib/">
 			<fileset dir="${lib.dir}"/>    
 		</copy>
+		<copy todir="${compile.dir}/war/WEB-INF/lib/">
+			<fileset dir="${lib.dir}"/>    
+		</copy>
 	</target>
 	
 	<target name="rmi">
@@ -110,6 +113,14 @@
 	
 	<!-- SYSTEMS -->
 	<target name="PHC-aspectj" depends="build-aspectj, jar, war"/>
+
+        <target name="deploy" depends="war">
+            <delete file="${tomcat.dir}/${app.name}.war" />
+            <copy   file="${jars.dir}/${app.name}.war" tofile="${tomcat.dir}/${app.name}.war" />
+            <exec executable="tomcat">
+               <arg value="restart" />
+            </exec>
+        </target>
 
 	<target name="stop-to-work" depends=""/>
 </project>
