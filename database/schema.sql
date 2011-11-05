@@ -1,13 +1,5 @@
--------------------------------------------------------------
--- MDB Tools - A library for reading MS Access database files
--- Copyright (C) 2000-2004 Brian Bruns
--- Files in libmdb are licensed under LGPL and the utilities under
--- the GPL, see COPYING.LIB and COPYING files respectively.
--- Check out http://mdbtools.sourceforge.net
--------------------------------------------------------------
-
-DROP TABLE SCBS_queixa;
-CREATE TABLE SCBS_queixa
+DROP TABLE scbs_queixa;
+CREATE TABLE scbs_queixa
  (
 	CODIGO			Text (100), 
 	TIPOQUEIXA			Text (100), 
@@ -24,8 +16,8 @@ CREATE TABLE SCBS_queixa
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_funcionario;
-CREATE TABLE SCBS_funcionario
+DROP TABLE scbs_funcionario;
+CREATE TABLE scbs_funcionario
  (
 	LOGIN			Text (100), 
 	NOME			Text (100), 
@@ -33,8 +25,8 @@ CREATE TABLE SCBS_funcionario
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_endereco;
-CREATE TABLE SCBS_endereco
+DROP TABLE scbs_endereco;
+CREATE TABLE scbs_endereco
  (
 	codigo			Text (100), 
 	rua			Text (100), 
@@ -47,8 +39,8 @@ CREATE TABLE SCBS_endereco
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_queixaalimentar;
-CREATE TABLE SCBS_queixaalimentar
+DROP TABLE scbs_queixaalimentar;
+CREATE TABLE scbs_queixaalimentar
  (
 	CODIGO			Text (100), 
 	QTDECOMENSAIS			Text (100), 
@@ -61,32 +53,32 @@ CREATE TABLE SCBS_queixaalimentar
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_UNIDADESAUDE;
-CREATE TABLE SCBS_UNIDADESAUDE
+DROP TABLE scbs_unidadesaude;
+CREATE TABLE scbs_unidadesaude
  (
 	CODIGO			Text (100), 
 	DESCRICAO			Text (100)
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_unidadeespecialidade;
-CREATE TABLE SCBS_unidadeespecialidade
+DROP TABLE scbs_unidadeespecialidade;
+CREATE TABLE scbs_unidadeespecialidade
  (
 	CODIGOUNIDADESAUDE			Text (100), 
 	CODIGOESPECIALIDADE			Text (100)
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_ESPECIALIDADE;
-CREATE TABLE SCBS_ESPECIALIDADE
+DROP TABLE scbs_especialidade;
+CREATE TABLE scbs_especialidade
  (
 	CODIGO			Text (100), 
 	DESCRICAO			Text (100)
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_TIPODOENCA;
-CREATE TABLE SCBS_TIPODOENCA
+DROP TABLE scbs_tipodoenca;
+CREATE TABLE scbs_tipodoenca
  (
 	CODIGO			Text (100), 
 	nome			Text (100), 
@@ -96,24 +88,24 @@ CREATE TABLE SCBS_TIPODOENCA
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_tipodoencasintoma;
-CREATE TABLE SCBS_tipodoencasintoma
+DROP TABLE scbs_tipodoencasintoma;
+CREATE TABLE scbs_tipodoencasintoma
  (
 	CODIGOTIPODOENCA			Text (100), 
 	CODIGOSINTOMA			Text (100)
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_sintoma;
-CREATE TABLE SCBS_sintoma
+DROP TABLE scbs_sintoma;
+CREATE TABLE scbs_sintoma
  (
 	CODIGO			Text (100), 
 	DESCRICAO			Text (100)
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_queixaanimal;
-CREATE TABLE SCBS_queixaanimal
+DROP TABLE scbs_queixaanimal;
+CREATE TABLE scbs_queixaanimal
  (
 	CODIGO			Text (100), 
 	QTDEANIMAIS			Text (100), 
@@ -123,8 +115,8 @@ CREATE TABLE SCBS_queixaanimal
 );
 -- CREATE ANY INDEXES ...
 
-DROP TABLE SCBS_queixadiversa;
-CREATE TABLE SCBS_queixadiversa
+DROP TABLE scbs_queixadiversa;
+CREATE TABLE scbs_queixadiversa
  (
 	CODIGO			Text (100), 
 	IDADE			Text (100), 

@@ -47,7 +47,7 @@ INSERT INTO SCBS_funcionario (LOGIN, NOME, SENHA) VALUES ("joe","Joe Bloggs","bl
 INSERT INTO SCBS_funcionario (LOGIN, NOME, SENHA) VALUES ("smith","John Smith","john");
 INSERT INTO SCBS_funcionario (LOGIN, NOME, SENHA) VALUES ("murphy","john","murphy");
 INSERT INTO SCBS_funcionario (LOGIN, NOME, SENHA) VALUES ("test","test","test");
-INSERT INTO SCBS_funcionario (LOGIN, NOME, SENHA) VALUES ("default","default version 4","default4");
+INSERT INTO SCBS_funcionario (LOGIN, NOME, SENHA) VALUES ("default","default version 4","default");
 INSERT INTO SCBS_funcionario (LOGIN, NOME, SENHA) VALUES ("version7","version 7","version7");
 INSERT INTO SCBS_funcionario (LOGIN, NOME, SENHA) VALUES ("authen","authen","authen");
 INSERT INTO SCBS_funcionario (LOGIN, NOME, SENHA) VALUES ("test2","test2","test2");
