@@ -42,10 +42,13 @@ public class ServletSearchHealthUnitsBySpecialty extends HttpServlet {
             out.println("<P><h3>Medical specialty: " + codigoEsp + "</h3></P>");
             out.println("<h3>Health units:</h3>");
 
-            while (repUS.hasNext()) {
-                IHealthUnitDt us = (IHealthUnitDt) repUS.next();
-                out.println("<dd><dd>" + us.getDescription());             
+            if ( repUS != null) {
+	            while (repUS.hasNext()) {
+	                IHealthUnitDt us = (IHealthUnitDt) repUS.next();
+	                out.println("<dd><dd>" + us.getDescription());             
+	            }
             }
+            
             out.println(htmlPageMgt.closeQueries());
         }catch (ObjectNotFoundException e) {
             out.println("<P> " + e.getMessage() + " </P>");  
