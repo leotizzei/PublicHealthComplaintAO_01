@@ -101,6 +101,11 @@ class ComplaintRepositoryRDB {
 			e.printStackTrace();
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
+		}
+		
 		return complaint;
 	}
 
@@ -176,6 +181,11 @@ class ComplaintRepositoryRDB {
 			e.printStackTrace();
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
+		}
+		
 		return complaint;
 	}
 
@@ -209,6 +219,11 @@ class ComplaintRepositoryRDB {
 			e.printStackTrace();
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
+		}
+		
 		return complaint;
 
 	}
@@ -298,7 +313,6 @@ class ComplaintRepositoryRDB {
 		} catch (SQLException e) {
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 		}
-
 	}
 
 	/**
@@ -350,6 +364,11 @@ class ComplaintRepositoryRDB {
 			e.printStackTrace();
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
+		}
+		
 		return complaint;
 	}
 
@@ -383,6 +402,10 @@ class ComplaintRepositoryRDB {
 			} catch (SQLException e) {
 				System.out.println(e.getLocalizedMessage()+" SQL="+sql);
 				throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
+			}
+			finally
+			{
+				mp.releaseCommunicationChannel();
 			}
 		} else {
 			throw new ObjectNotValidException(ExceptionMessages.EXC_NULO);
@@ -490,6 +513,10 @@ class ComplaintRepositoryRDB {
 			System.err.println("[ComplaintRepositoryRDB:deepInserCommon()] SQL="+sql);
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
+		}
 	}
 
 	private void deepInsertSpecial(ISpecialComplaintDt complaint)
@@ -527,6 +554,10 @@ class ComplaintRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(consulta);
 			throw new PersistenceSoftException(e);
+		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
 		}
 		return response;
 	}
@@ -584,6 +615,10 @@ class ComplaintRepositoryRDB {
 			System.err.println("[ComplaintRepository:insert()] Exception:"+e.getLocalizedMessage());
 			e.printStackTrace();
 		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
+		}
 
 		return complaint.getCodigo();
 	}
@@ -612,6 +647,10 @@ class ComplaintRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(sql);
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
+		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
 		}
 	}
 
@@ -670,6 +709,10 @@ class ComplaintRepositoryRDB {
 			System.out.println(sql);
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
+		}
 	}
 
 	private void insertSpecial(ISpecialComplaintDt complaint) throws RepositoryException {
@@ -693,6 +736,10 @@ class ComplaintRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(sql);
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
+		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
 		}
 	}
 
@@ -724,6 +771,10 @@ class ComplaintRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(sql);
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_PROCURA);
+		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
 		}
 
 		// Dependendo do tipo da queixa o acesso aos dados e feito
@@ -805,6 +856,10 @@ class ComplaintRepositoryRDB {
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 			throw new RepositoryException("SQLException: " + e.getMessage());
+		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
 		}
 
 

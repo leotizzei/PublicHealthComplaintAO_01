@@ -84,6 +84,8 @@ class HealthUnitRepositoryRDB {
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_PROCURA);
 		} catch(Exception e){
 			e.printStackTrace();
+		} finally {
+			mp.releaseCommunicationChannel();			
 		}
 
 		// 	O retorno desse metodo e uma estrutura que permite a

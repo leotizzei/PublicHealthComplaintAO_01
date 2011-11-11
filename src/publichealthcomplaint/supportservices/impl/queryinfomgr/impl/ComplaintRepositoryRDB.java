@@ -91,6 +91,8 @@ class ComplaintRepositoryRDB {
 		} catch (java.sql.SQLException e) {
 			e.printStackTrace();
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
+		} finally {
+			mp.releaseCommunicationChannel();			
 		}
 		return complaint;
 	}
@@ -165,6 +167,8 @@ class ComplaintRepositoryRDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
+		} finally {
+			mp.releaseCommunicationChannel();			
 		}
 		return complaint;
 	}
@@ -291,6 +295,8 @@ class ComplaintRepositoryRDB {
 			System.out.println(sql);
 			e.printStackTrace();
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
+		} finally {
+			mp.releaseCommunicationChannel();			
 		}
 		return complaint;
 	}
@@ -318,6 +324,8 @@ class ComplaintRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(sql);
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_PROCURA);
+		} finally {
+			mp.releaseCommunicationChannel();			
 		}
 
 		// Dependendo do tipo da queixa o acesso aos dados e feito
@@ -384,6 +392,8 @@ class ComplaintRepositoryRDB {
 		} catch (RepositoryException e) {
 			e.printStackTrace();
 			throw new RepositoryException("SQLException: " + e.getMessage());
+		} finally {
+			mp.releaseCommunicationChannel();			
 		}
 
 		return this.distributionMgt.createIterator(cList);
