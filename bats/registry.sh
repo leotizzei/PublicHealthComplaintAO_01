@@ -1,6 +1,4 @@
 #!/bin/bash
-./setVars.sh
 echo "Called setVars.sh"
-rmiregistry;
+rmiregistry -J-Djava.security.policy=rmi.policy &
 echo "Called rmiregistry"
-pause;
