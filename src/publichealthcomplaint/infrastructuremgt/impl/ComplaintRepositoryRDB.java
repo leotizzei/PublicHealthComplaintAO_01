@@ -46,6 +46,10 @@ class ComplaintRepositoryRDB  {
 			} catch (SQLException e) {
 				throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 			}
+			finally
+			{
+				mp.releaseCommunicationChannel();
+			}
 		} else {
 			throw new ObjectNotValidException(ExceptionMessages.EXC_NULO);
 		}

@@ -17,7 +17,8 @@ class Manager implements IManager {
 		System.out.println("[rmiconnector.Manager] Constructor");
 		this.providedInterfaces = new HashMap();
 		this.requiredInterfaces = new HashMap();
-
+		
+		this.providedInterfaces.put("IFacade", HealthWatcherFacade.getInstance());
 	}
 
 

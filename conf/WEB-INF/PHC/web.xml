@@ -48,7 +48,7 @@
 	<!-- INSERT FOOD COMPLAINT -->
 	<servlet>
 		<servlet-name>ServletInsertFoodComplaint</servlet-name>
-		<servlet-class>publichealthcomplaint.userinterface.impl.foodcomplaint.impl.ServletInsertFoodComplaint</servlet-class>
+		<servlet-class>publichealthcomplaint.userinterface.impl.generalcomplaint.impl.ServletInsertFoodComplaint</servlet-class>
 	</servlet>
 
 

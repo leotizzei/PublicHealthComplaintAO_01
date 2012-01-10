@@ -124,7 +124,6 @@ class HealthUnitRepositoryRDB {
 							+ esp.getDescricao());
 					specialities.add(esp);
 				} catch (ObjectNotFoundException ex) {
-					System.err.println(ex.getLocalizedMessage());
 				}
 			}
 			resultSet.close();

@@ -39,8 +39,16 @@ public abstract aspect AAServerDistribution {
 				System.out.println("[AAServerDistribution:registering()] adapter = "+adapter);
 			//end debug
 			
+			try
+			{
+				UnicastRemoteObject.exportObject(adapter);
+			}
+			catch (java.rmi.RemoteException rmiEx)
+			{
+				// object already exported 
+			}
 			
-			UnicastRemoteObject.exportObject(adapter);
+			
 			System.out.println("[AAServerDistribution:registering()]  Object "+ adapter.getClass().getName() +" exported");
 			java.rmi.Naming.rebind("//" + Constants.SERVER_NAME + "/"
 					+ Constants.SYSTEM_NAME, adapter);

@@ -116,7 +116,6 @@ class Schedule implements IScheduleDt{
 				horaStr = "0" + horaStr;
 			}
 		} catch (NumberFormatException nb) {
-			System.err.println(nb.getLocalizedMessage());
 		}
 
 		switch (formato) {
