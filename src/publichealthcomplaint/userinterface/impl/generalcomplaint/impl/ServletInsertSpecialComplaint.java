@@ -19,7 +19,7 @@ import publichealthcomplaint.userinterface.impl.generalcomplaint.spec.prov.IGene
 import publichealthcomplaint.userinterface.impl.generalcomplaint.spec.prov.IManager;
 import publichealthcomplaint.userinterface.impl.generalcomplaint.spec.req.IComplaintMgt;
 import publichealthcomplaint.userinterface.impl.generalcomplaint.spec.req.IUtil;
-import publichealthcomplaint.userinterface.impl.queryinfo.spec.req.IHTMLPageMgt;
+import publichealthcomplaint.userinterface.impl.generalcomplaint.spec.req.IHTMLPageMgt;
 
 
 
@@ -48,7 +48,7 @@ public class ServletInsertSpecialComplaint extends HttpServlet {
 			else{
 				//Queixa Normal
 				SpecialComplaint specialComplaint = new SpecialComplaint();
-				IGeneralComplaintMgt generalComplaintMgt = (IGeneralComplaintMgt) mgr.getRequiredInterface("IGeneralComplaintMgt");
+				IGeneralComplaintMgt generalComplaintMgt = (IGeneralComplaintMgt) mgr.getProvidedInterface("IGeneralComplaintMgt");
 				generalComplaintMgt.readGeneralComplaintData(request, specialComplaint);
 
 				//Queixa Diversa

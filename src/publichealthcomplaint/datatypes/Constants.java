@@ -8,13 +8,13 @@ public class Constants {
 	// Database Configuration
 	
 	//public static final String DB_URL = "jdbc:odbc:test";
-	public static final String DB_URL = "jdbc:mysql://localhost:3306/test";
+	public static final String DB_URL = "jdbc:mysql://localhost:3306/phc";
 	
 	//public static final String DB_LOGIN = "orbi2";
-	public static final String DB_LOGIN = "root";
+	public static final String DB_LOGIN = "phc";
 	
 	//public static final String DB_PASS = "orbi2";
-	public static final String DB_PASS = "EgdmcT";
+	public static final String DB_PASS = "phc1234";
 	
 	//public static final String DB_DRIVER = "sun.jdbc.odbc.JdbcOdbcDriver";
 	public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
@@ -26,8 +26,8 @@ public class Constants {
 	// SERVLETS Configuration
 	
 	// You should point this path to the base of the forms in your system
-	
-	public static final String FORM_PATH = "/home/leonardo/workspace3/PublicHealthComplaintAO_01/web/publichealthcomplaint/forms/first/";
+	//TODO: definir caminho relativo ao contexto do servelt
+	public static final String FORM_PATH = "/home/andre/msc/projects/phc/PublicHealthComplaintAO_01/web/publichealthcomplaint/forms/first/";
 	
 
 	
@@ -38,7 +38,7 @@ public class Constants {
 	public static final String SYSTEM_ROOT = "http://" + SERVLET_SERVER_PATH + "ServletWebServer?file=";
 
 
-	public static final String SYSTEM_ACTION = "http://" + SERVLET_SERVER_PATH + "HWServlet";
+	public static final String SYSTEM_ACTION = SERVLET_SERVER_PATH;
 
 	public static final String SYSTEM_INDEX = "http://"+SERVLET_SERVER_PATH + "ServletWebServer?file=index.html";
 	

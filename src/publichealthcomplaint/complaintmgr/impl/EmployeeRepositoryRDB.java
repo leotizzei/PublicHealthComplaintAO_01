@@ -41,6 +41,8 @@ class EmployeeRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(sql);
 			throw new PersistenceSoftException(e);
+		} finally {
+			pm.releaseCommunicationChannel();			
 		}
 	}
 
@@ -66,6 +68,8 @@ class EmployeeRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(sql);
 			throw new PersistenceSoftException(e);
+		} finally {
+			pm.releaseCommunicationChannel();			
 		}
 		return employee;
 	}
@@ -84,6 +88,8 @@ class EmployeeRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(sql);
 			throw new PersistenceSoftException(e);
+		} finally {
+			pm.releaseCommunicationChannel();			
 		}
 		return response;
 	}
@@ -100,6 +106,8 @@ class EmployeeRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(sql);
 			throw new PersistenceSoftException(e);
+		} finally {
+			pm.releaseCommunicationChannel();			
 		}
 	}
 

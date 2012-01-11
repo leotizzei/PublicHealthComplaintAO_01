@@ -101,7 +101,7 @@ public class HealthWatcherFacade implements IFacade {
 	public void insert(IEmployeeDt e)  {
 		System.out.println("[HealthWatcherFacade:insert()]");
 		IManager mgr = ComponentFactory.createInstance();
-		IEmployeeMgt employeeMgr = (IEmployeeMgt) mgr.getRequiredInterface("IInfrastructureMgt");
+		IEmployeeMgt employeeMgr = (IEmployeeMgt) mgr.getRequiredInterface("IEmployeeMgt");
 		employeeMgr.insert(e);
 		
 
@@ -193,7 +193,7 @@ public class HealthWatcherFacade implements IFacade {
 	public void updateEmployee(IEmployeeDt e) {
 		System.out.println("[HealthWatcherFacade:insert()]");
 		IManager mgr = ComponentFactory.createInstance();
-		IEmployeeMgt infrastructureMgt = (IEmployeeMgt) mgr.getRequiredInterface("IInfrastructureMgt");
+		IEmployeeMgt infrastructureMgt = (IEmployeeMgt) mgr.getRequiredInterface("IEmployeeMgt");
 		
 		infrastructureMgt.updateEmployee(e);
 		

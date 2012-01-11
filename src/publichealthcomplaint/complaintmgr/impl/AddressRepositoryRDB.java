@@ -77,6 +77,10 @@ class AddressRepositoryRDB{
 				System.out.println(consulta);
 				throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 			}
+			finally
+			{
+				mp.releaseCommunicationChannel();
+			}
 
 			// Consulta na tabela ao codigo gerado pelo trecho anterior.
 			// Caso o codigo ja esteja em uso uma excecao e levantada.
@@ -92,6 +96,10 @@ class AddressRepositoryRDB{
 				stmt.close();
 			} catch (SQLException e) {
 				throw new PersistenceMechanismException(ExceptionMessages.EXC_FALHA_BD);
+			}
+			finally
+			{
+				mp.releaseCommunicationChannel();
 			}
 
 			// Essa ultima etapa da insercao insere de fato os valores
@@ -117,6 +125,11 @@ class AddressRepositoryRDB{
 			} catch (SQLException e) {
 				throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
 			}
+			finally
+			{
+				mp.releaseCommunicationChannel();
+			}
+			
 		} catch (PersistenceMechanismException e) {
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_INCLUSAO);
 		}
@@ -171,6 +184,10 @@ class AddressRepositoryRDB{
 
 		} catch (SQLException e) {
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
+		}
+		finally
+		{
+			mp.releaseCommunicationChannel();
 		}
 
 		return end;

@@ -1,5 +1,6 @@
 package publichealthcomplaint.userinterface.impl.util.impl;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -7,7 +8,7 @@ import publichealthcomplaint.datatypes.IScheduleDt;
 import publichealthcomplaint.exceptionhandling.impl.InvalidDateException;
 
 
-class Schedule implements IScheduleDt{
+class Schedule implements IScheduleDt, Serializable {
 
 	private int segundo;
 

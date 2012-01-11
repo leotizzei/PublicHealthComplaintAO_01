@@ -162,7 +162,6 @@ class Date implements IDateDt{
 		try {
 			dataRetorno = new Date(tag, monat, jahre);
 		} catch (InvalidDateException die) {
-			System.err.println(die.getLocalizedMessage());
 		}
 
 		return dataRetorno;
@@ -258,9 +257,7 @@ class Date implements IDateDt{
 
 		try {
 			data = new Date(dia, mes, ano);
-
 		} catch (Exception e) {
-			System.err.println(e.getLocalizedMessage());
 		}
 
 		return ehFinalDeSemana(data);
@@ -351,7 +348,6 @@ class Date implements IDateDt{
 				break;
 			}
 		} catch (NumberFormatException nb) {
-			System.err.println(nb.getLocalizedMessage());
 		}
 
 		return texto;
@@ -510,7 +506,6 @@ class Date implements IDateDt{
 		try {
 			dataRetorno = new Date(tag, monat, jahre);
 		} catch (InvalidDateException die) {
-			System.err.println(die.getLocalizedMessage());
 		}
 
 		return dataRetorno;
