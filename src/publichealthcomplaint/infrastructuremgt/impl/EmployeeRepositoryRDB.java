@@ -34,6 +34,10 @@ class EmployeeRepositoryRDB {
 			System.out.println(sql);
 			throw new PersistenceSoftException(e);
 		}
+		finally
+		{
+			pm.releaseCommunicationChannel();
+		}
 	}
 
 	void update(IEmployeeDt employee) throws ObjectNotFoundException, ObjectNotValidException {
@@ -48,6 +52,10 @@ class EmployeeRepositoryRDB {
 		} catch (SQLException e) {
 			System.out.println(sql);
 			throw new PersistenceSoftException(e);
+		}
+		finally
+		{
+			pm.releaseCommunicationChannel();
 		}
 	}
 
@@ -75,6 +83,11 @@ class EmployeeRepositoryRDB {
 			System.out.println(sql);
 			throw new PersistenceSoftException(e);
 		}
+		finally
+		{
+			pm.releaseCommunicationChannel();
+		}
+		
 		return employee;
 	}
 

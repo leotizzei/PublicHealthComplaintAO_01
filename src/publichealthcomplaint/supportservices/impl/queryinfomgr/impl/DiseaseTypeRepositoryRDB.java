@@ -55,6 +55,8 @@ class DiseaseTypeRepositoryRDB  {
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
+		} finally {
+			mp.releaseCommunicationChannel();			
 		}
 		
 		return this.dist.createIterator(listatd);
@@ -194,6 +196,8 @@ class DiseaseTypeRepositoryRDB  {
 
 		} catch (SQLException e) {
 			throw new RepositoryException(ExceptionMessages.EXC_FALHA_BD);
+		} finally {
+			mp.releaseCommunicationChannel();			
 		}
 		
 		return td;

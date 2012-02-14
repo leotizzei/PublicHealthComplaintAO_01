@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import publichealthcomplaint.userinterface.impl.generalcomplaint.spec.req.IComplaintMgt;
 import publichealthcomplaint.userinterface.impl.generalcomplaint.spec.req.IUpdate;
+import publichealthcomplaint.userinterface.impl.infrastr.spec.req.IInfrastructureMgt;
 import publichealthcomplaint.userinterface.impl.queryinfo.spec.req.IQueryInfoMgt;
 
 
@@ -27,6 +28,8 @@ class Manager implements IManager {
 		IQueryInfoMgt query = new AdapterIQueryInfoMgt();
 		providedInterfaces.put("IQueryInfoMgt", query);
 		
+		IInfrastructureMgt infraMgt = new AdapterIInfrastructureMgt();
+		providedInterfaces.put("IInfrastructureMgt", infraMgt);
 	}
 
 
