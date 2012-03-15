@@ -3,11 +3,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
 	<classpathentry kind="con" path="org.eclipse.ajdt.core.ASPECTJRT_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/leonardo/programs/glassfish-v3.1/glassfish3/glassfish/modules/javax.servlet.jar"/>
 	<classpathentry kind="lib" path="lib/aspectjtools.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.14-bin.jar"/>
-	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/rome-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/captchaPackage.jar"/>
-	<classpathentry kind="lib" path="lib/javax.servlet.jar"/>
+	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

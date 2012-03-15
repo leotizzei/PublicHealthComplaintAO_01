@@ -1,0 +1,14 @@
+PUBLIC HEALTH COMPLAINT SYSTEM - SOFTWARE PRODUCT LINE
+
+
+INSTALL
+1) Setup the variables in the ./src/publichealthcomplaint/datatypes/Constants.java according to your system configuration 
+
+
+EXECUTE
+1) Build the PHCS: ant build.xml
+2) Execute the Java EE server you like. For instance, if you are using glassfish, run: <$GLASSFISH-HOME/bin/> asadmin start-domain domain
+3) Execute the RMI registry: <$PHCS-HOME/bats/> sh registry.sh
+4) Open with your browser the address (for glassfish): http://localhost:4848/
+5) Deploy the war file generate after the execution of the step 1. Add the path to all libraries separated by comma in the "Libraries" field. Click on "OK".
+6) Click on "launch"

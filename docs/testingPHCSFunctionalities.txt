@@ -1,0 +1,26 @@
+15/Mar - Testing PHCS functionalities:
+
+Insert a new complaint
+- Complaint related to food (OK)
+- Complaint related to animals (OK)
+- Complaint related to drugs (NOK)
+- Other kind of complaint (OK)
+
+ 
+Queries' menu
+- Show medical specialties grouped by health units (OK)
+- Show health units grouped by medical specialties (OK)
+- Search complaints (OK)
+- Search disease type data (OK)
+
+Employee login
+- Login (OK)
+- Update complaint (NOK)
+- Insert new employee (OK)
+- Update employee (change password) (OK)
+- Change health unit data (NOK)
+- Change logged employee (OK)
+
+RSS feeds
+- receive feeds (OK)
+- publish feeds 

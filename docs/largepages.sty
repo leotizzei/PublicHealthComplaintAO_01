@@ -1,0 +1,30 @@
+% LARGEPAGES DOCUMENT STYLE -- released 08 October 1986
+%    for LaTeX 2.09
+% By Pedro J. de Rezende.
+%
+% LARGEPAGES resets margins, page width and height to lead to wider and longer
+% centered pages. It should be used as a document style option (possibly
+% together with 11pt, 12pt, twocolumn, etc).
+%
+\typeout{Document Style Option `largepages' -- Released 08 October 1986}
+
+% SIDE MARGINS:
+
+\if@twoside
+   \oddsidemargin -34pt
+   \evensidemargin 26pt
+   \marginparwidth 48pt
+\else
+   \oddsidemargin  -4pt
+   \evensidemargin -4pt
+   \marginparwidth 36pt
+\fi
+
+% VERTICAL SPACING:
+
+\topmargin  -32pt
+
+% DIMENSIONS OF TEXT:
+
+\textheight 8.5in
+\textwidth  6.5in

@@ -1,3 +1,15 @@
-bin
-tmp
+bin/
+tmp/
 .settings
+*.class
+*.log
+*.lot
+*.bbl
+*.blg
+*.aux
+*.idx
+*.ind
+*.ilg
+*.toc
+*.*~
+
