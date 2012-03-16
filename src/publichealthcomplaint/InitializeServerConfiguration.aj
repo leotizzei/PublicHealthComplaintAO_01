@@ -89,7 +89,7 @@ public aspect InitializeServerConfiguration {
 			
 		generalCompMgr.setRequiredInterface("IUtil", gen_utilMgr.getProvidedInterface("IUtil"));
 		generalCompMgr.setRequiredInterface("IHTMLPageMgt", gen_utilMgr.getProvidedInterface("IHTMLPageMgt"));
-		generalCompMgr.setRequiredInterface("IUpdate", userIntMgr.getProvidedInterface("IUpdate"));
+		generalCompMgr.setRequiredInterface("IUpdate", user_conn.getProvidedInterface("IUpdate"));
 		generalCompMgr.setRequiredInterface("IComplaintMgt", user_conn.getProvidedInterface("IComplaintMgt"));
 		
 		user_conn.setRequiredInterface("IFacade", rmiConnMgr.getProvidedInterface("IFacade"));
@@ -104,6 +104,8 @@ public aspect InitializeServerConfiguration {
 		queryMgr.setRequiredInterface("IHTMLPageMgt", queryinfor_utilMgr.getProvidedInterface("IHTMLPageMgt"));
 		queryMgr.setRequiredInterface("IUtil", queryinfor_utilMgr.getProvidedInterface("IUtil"));
 		queryMgr.setRequiredInterface("IQueryInfoMgt", user_conn.getProvidedInterface("IQueryInfoMgt"));
+		
+		
 	}
 
 }

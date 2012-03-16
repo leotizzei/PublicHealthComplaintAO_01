@@ -49,6 +49,16 @@ class Manager implements IManager {
 
 	
 	public void setRequiredInterface(String name, Object facade) {
+		
+		if( (name != null) && (facade != null) )
+			System.out.println("[Manager:setRequiredInterface] name="+name+" facade="+facade.toString());
+		else{
+			if ( name != null )
+				System.out.println("[Manager:setRequiredInterface] name="+name+" facade = null");
+			else
+				System.out.println("[Manager:setRequiredInterface] name= null facade = "+ facade.toString());
+		}
+			
 		this.requiredInterfaces.put(name, facade);
 
 	}

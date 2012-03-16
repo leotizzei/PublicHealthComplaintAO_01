@@ -127,29 +127,20 @@ class MethodExecutor {
 	}
 
 	private static boolean checkSuperTypes(Class type, Class param) {
-		//debug
+		
 
 		if( type == null){
-			System.out.println("[MethodExecutor:checkSuperTypes()] type == null");
 			throw new IllegalArgumentException("Null argument");
-		}
-		else {
-			System.out.println("[MethodExecutor:checkSuperTypes()] type="+type.getCanonicalName());
 		}
 		if( param == null){
-			System.out.println("[MethodExecutor:checkSuperTypes()] param == null");
 			throw new IllegalArgumentException("Null argument");
 		}
-		else 
-			System.out.println("[MethodExecutor:checkSuperTypes()] param="+param.getCanonicalName());
-		if(type != null)
-			System.out.println("[MethodExecutor:checkSuperTypes()]"+type.getCanonicalName()+"==Object");
-
+		
+		
 		if (! type.equals(Object.class)) {
-			System.out.println("[MethodExecutor:checkSuperTypes()] passou no if "+type.getCanonicalName()+"!=Object");
+			
 
 			if (type.equals(param)) {
-				//System.out.println("[MethodExecutor:checkSuperTypes()] return true: "+type.getCanonicalName()+"=="+param.getCanonicalName());
 				return true;
 			}
 			else{
@@ -158,9 +149,7 @@ class MethodExecutor {
 					if( interfaces != null ){
 						int i;
 						for( i = 0 ; i < interfaces.length; i++ ){
-							//System.out.println("[MethodExecutor:checkSuperTypes()] inside for: type="+type.getCanonicalName()+" param.interface["+i+"]="+interfaces[i].getCanonicalName());
 							if(type.equals(interfaces[i])){
-								//System.out.println("[MethodExecutor:checkSuperTypes()] returns true"); 
 								return true;
 							}
 						}
@@ -170,7 +159,7 @@ class MethodExecutor {
 
 			return checkSuperTypes(type, param.getSuperclass());
 		}
-		//System.out.println("[MethodExecutor:checkSuperTypes()] return false");
+		
 		return false;
 	}
 }

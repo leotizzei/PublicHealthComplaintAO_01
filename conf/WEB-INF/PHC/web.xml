@@ -327,7 +327,7 @@
 
 	<servlet-mapping>
 		<servlet-name>ServletUpdateComplaintSearch</servlet-name>
-		<url-pattern>/publichealthcomplaint.userinterface.impl.generalcomplaint.ServletUpdateComplaintSearch</url-pattern>
+		<url-pattern>/publichealthcomplaint.userinterface.impl.generalcomplaint.impl.ServletUpdateComplaintSearch</url-pattern>
 	</servlet-mapping>
 
 

@@ -34,8 +34,10 @@ class Manager implements IManager {
 
 
 	public Object getProvidedInterface(String name) {
-		if( name != null)
-			return this.providedInterfaces.get(name);
+		if( name != null){
+			Object obj = this.providedInterfaces.get(name); 
+			return obj;
+		}
 		else{
 			System.err.println(this.getClass().getCanonicalName()+":Invalid argument");
 			return null;

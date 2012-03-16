@@ -45,7 +45,9 @@ public aspect AdapterIFacadeXPI {
 	IteratorDsk around():callGetHealthUnitList(){
 		IManager mgr = ComponentFactory.createInstance();
 		IFacade facade = (IFacade) mgr.getRequiredInterface("IFacade");
-		return facade.getComplaintList();
+		IteratorDsk iteratorDsk = facade.getHealthUnitList();
+		
+		return iteratorDsk;
 	}
 
 	

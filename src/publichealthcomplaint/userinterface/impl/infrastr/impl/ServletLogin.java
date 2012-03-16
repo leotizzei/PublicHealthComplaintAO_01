@@ -102,15 +102,6 @@ public class ServletLogin extends HttpServlet {
 				session.setAttribute(ServletLogin.EMPLOYEE, employee);
 				session.putValue(ServletLogin.EMPLOYEE, employee);
 				IUtil util = (IUtil) mgr.getRequiredInterface("IUtil");
-				
-				//begin debug
-				if( util == null)
-					System.out.println("[ServletLogin:doPost()] util is null");
-				else
-					System.out.println("[ServletLogin:doPost()] util is NOT null");
-				//end debug
-				
-				
 				out.println(util.getFileListReplace(keywords, newWords, Constants.FORM_PATH+"MenuEmployee.html"));                
 			} else {                                 
 				out.println(htmlPageMgt.errorPage("Invalid password! <br><a href=\""+Constants.SYSTEM_LOGIN+"\">Try again</a>"));

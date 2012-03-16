@@ -1,4 +1,4 @@
-15/Mar - Testing PHCS functionalities:
+16/Mar - Testing PHCS functionalities:
 
 Insert a new complaint
 - Complaint related to food (OK)
@@ -15,12 +15,12 @@ Queries' menu
 
 Employee login
 - Login (OK)
-- Update complaint (NOK)
+- Update complaint (OK)
 - Insert new employee (OK)
 - Update employee (change password) (OK)
-- Change health unit data (NOK)
+- Change health unit data (OK)
 - Change logged employee (OK)
 
 RSS feeds
 - receive feeds (OK)
-- publish feeds 
+- publish feeds ???

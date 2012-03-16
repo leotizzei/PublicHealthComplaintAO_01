@@ -21,7 +21,7 @@ import publichealthcomplaint.userinterface.impl.infrastr.spec.req.IHTMLPageMgt;
 import publichealthcomplaint.userinterface.impl.infrastr.spec.req.IInfrastructureMgt;
 
 
-
+			 
 public class ServletUpdateHealthUnitSearch extends HttpServlet {
 
     public static final String HEALTH_UNIT = "health unit";
@@ -50,6 +50,7 @@ public class ServletUpdateHealthUnitSearch extends HttpServlet {
             out.println("<div align=\"center\"><center><p><select name=\"numUS\" size=\"1\">");
 
             IInfrastructureMgt infra = (IInfrastructureMgt) mgr.getRequiredInterface("IInfrastructureMgt");
+            
             IteratorDsk repTP = infra.getHealthUnitList();
 
             if (repTP==null||!repTP.hasNext()) {
