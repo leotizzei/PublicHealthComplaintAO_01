@@ -531,9 +531,7 @@ class ComplaintRepositoryRDB {
 		insertSpecial(complaint);
 	}
 
-	private void deepInsertDrug(IDrugComplaintDt complaint)
-	throws PersistenceMechanismException, RepositoryException,
-	ObjectAlreadyInsertedException {
+	private void deepInsertDrug(IDrugComplaintDt complaint) throws PersistenceMechanismException, RepositoryException, ObjectAlreadyInsertedException {
 
 		insertDrug(complaint);
 	}
@@ -586,15 +584,19 @@ class ComplaintRepositoryRDB {
 
 				int complaintType = getComplaintType(complaint);
 				switch( complaintType ){
+				//food complaint
 				case Complaint.QUEIXA_ALIMENTAR:
 					IFoodComplaintDt food = (IFoodComplaintDt) complaint;
 					deepInsertFood(food);break;
+				//animal complaint
 				case Complaint.QUEIXA_ANIMAL:
 					IAnimalComplaintDt animal = (IAnimalComplaintDt) complaint;
 					deepInsertAnimal(animal);break;
+				//special complaint
 				case Complaint.QUEIXA_DIVERSA:
 					ISpecialComplaintDt special = (ISpecialComplaintDt) complaint;
 					deepInsertSpecial(special); break;
+				//drug complaint
 				case Complaint.QUEIXA_DROGA:
 					IDrugComplaintDt drugComplaint = (IDrugComplaintDt) complaint;
 					deepInsertDrug(drugComplaint); break;
@@ -655,36 +657,57 @@ class ComplaintRepositoryRDB {
 	}
 
 	private void insertDrug(IDrugComplaintDt complaint) throws RepositoryException {
-		System.out.println("[insertDrug] ");
+		System.out.println("[ComplaintRepositoryRDB:insertDrug] ");
 		String sql = null;
 
 		// Inserir na tabela agora
 		sql = "insert into scbs_queixamedica (code,drugdata,suspectmedicaldevice,suspectproduct) values (";
-		sql += "'" + complaint.getCodigo() + "','";
+		sql += "'" + complaint.getCodigo() + "',";
 
 		//insert drug data
 		IDrugDataDt drugData = complaint.getDrugData();
 		if( drugData != null)
-			sql += "'" + complaint.getCodigo() + "','";
+			sql += "'"+ complaint.getCodigo() + "'";
 		else
-			sql +="'NULL','";
-
+			sql +="NULL";
+		
 		//insert suspect medical device
 		ISuspectMedicalDeviceDt suspectMedicalDevice = complaint.getSuspectMedicalDevice();
 		if( suspectMedicalDevice != null)
-			sql += "'" + complaint.getCodigo() + "','";
+			sql += ",'" + complaint.getCodigo() + "'";
 		else
-			sql +="'NULL','";
+			sql +=",NULL";
 
 		//insert suspect product
 		ISuspectProductDt suspectProduct = complaint.getSuspectProduct();
 		if( suspectProduct != null)
-			sql += "'" + complaint.getCodigo() + "','";
+			sql += ",'" + complaint.getCodigo() + "')";
 		else
-			sql +="'NULL','";
+			sql +=",NULL)";
 
+		System.out.println("");
+		System.out.println("[ComplaintRepositoryRDB:insertDrug] sql=["+sql+"]");
+		
+		Statement stmt = (Statement) this.mp.getCommunicationChannel();
+		try {
+			stmt.executeUpdate(sql);
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
 	}
 
+	private void insertDrugData(IDrugDataDt drugData){
+		String sql = new String("insert into scbs_drug(code,typeofproblem,outcomes,dateofevent,eventdescription,history,available,reported)" +
+				" values (");
+		String[] listOfProblems = drugData.getTypeOfProblems();
+		for(int i = 0; i < listOfProblems.length; i++){
+			sql = 
+		}
+		 
+	}
 
 	private void insertAnimal(IAnimalComplaintDt complaint) throws RepositoryException {
 		String sql = null;
@@ -788,8 +811,7 @@ class ComplaintRepositoryRDB {
 		case Complaint.QUEIXA_ANIMAL:
 			q = accessAnimal(code);
 			break;
-
-		case Complaint.QUEIXA_DIVERSA:
+    	case Complaint.QUEIXA_DIVERSA:
 			q = accessSpecial(code);
 			break;
 		case Complaint.QUEIXA_DROGA:
