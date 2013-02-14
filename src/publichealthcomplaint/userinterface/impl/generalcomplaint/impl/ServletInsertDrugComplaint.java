@@ -16,6 +16,8 @@ import publichealthcomplaint.datatypes.IComplaintDt;
 import publichealthcomplaint.datatypes.IDateDt;
 import publichealthcomplaint.datatypes.IDrugComplaintDt;
 import publichealthcomplaint.datatypes.IDrugDataDt;
+import publichealthcomplaint.datatypes.ISuspectMedicalDeviceDt;
+import publichealthcomplaint.datatypes.ISuspectProductDt;
 import publichealthcomplaint.exceptionhandling.impl.InvalidDateException;
 import publichealthcomplaint.exceptionhandling.impl.ObjectAlreadyInsertedException;
 import publichealthcomplaint.exceptionhandling.impl.ObjectNotValidException;
@@ -55,38 +57,16 @@ public class ServletInsertDrugComplaint extends HttpServlet {
 				out.println("<html><head></head><body><center><h1>Sorry, you have typed the wrong captcha code. Please try again.</h1></center></body></html>");
 			}
 			else{
-				
+
 				FacadeGeneralComplaint generalComplaintMgt = new FacadeGeneralComplaint();
-				
+
 				IDrugComplaintDt drugComplaint = new DrugComplaint();
 
 				// common to all complaints
 				generalComplaintMgt.readGeneralComplaintData(request, drugComplaint);
-				
-							
 
-				//obtaining drug data
-				String[] listOfProblems = request.getParameterValues("typeProblem"); 
-				String[] outcomes = request.getParameterValues("outcomes");
-				String dateOfEventStr = request.getParameter("dateOfEvent");
-				String eventDescription = request.getParameter("eventDescription");
-				String tests = request.getParameter("tests");
-				String history = request.getParameter("history");
-				String available = request.getParameter("available");
-				String[] reported = request.getParameterValues("reported");
-
-				//creating drug data object
-				IDrugDataDt drugData = new DrugData();
-				drugData.setTypeOfProblems(listOfProblems);
-				drugData.setOutcomes(outcomes);
-				IDateDt date = this.convertStringToDate( dateOfEventStr );
-				drugData.setDateOfEvent( date );
-				drugData.setEventDescription(eventDescription);
-				drugData.setTests(tests);
-				drugData.setHistory(history);
-				drugData.setAvailable(available);
-				drugData.setAlsoReported(reported);
-
+				IDrugDataDt drugData = getDrugDataValues(request);
+				// TODO fazer o mesmo para suspectmedicaldevice and suspectproduct
 
 				drugComplaint.setDrugData(drugData);
 				IComplaintMgt complaint = (IComplaintMgt) mgr.getRequiredInterface("IComplaintMgt");
@@ -94,7 +74,7 @@ public class ServletInsertDrugComplaint extends HttpServlet {
 
 				out.println(htmlPageMgt.htmlPage("Complaint inserted", 
 						"<p> <h2> Drug Complaint inserted</h2> </p>" +
-						"<p> <h2> Save the complaint number: " + codigo + "</h2> </p>")); 
+								"<p> <h2> Save the complaint number: " + codigo + "</h2> </p>")); 
 			}
 
 		} catch (InvalidDateException e) {
@@ -111,6 +91,40 @@ public class ServletInsertDrugComplaint extends HttpServlet {
 		}
 	}
 
+	private IDrugDataDt getDrugDataValues(HttpServletRequest request) throws InvalidDateException{
+		//obtaining drug data
+		String[] listOfProblems = request.getParameterValues("typeProblem"); 
+		String[] outcomes = request.getParameterValues("outcomes");
+		String dateOfEventStr = request.getParameter("dateOfEvent");
+		String eventDescription = request.getParameter("eventDescription");
+		String tests = request.getParameter("tests");
+		String history = request.getParameter("history");
+		String available = request.getParameter("available");
+		String[] reported = request.getParameterValues("reported");
+
+		//creating drug data object
+		IDrugDataDt drugData = new DrugData();
+		drugData.setTypeOfProblems(listOfProblems);
+		drugData.setOutcomes(outcomes);
+		IDateDt date = this.convertStringToDate( dateOfEventStr );
+		drugData.setDateOfEvent( date );
+		drugData.setEventDescription(eventDescription);
+		drugData.setTests(tests);
+		drugData.setHistory(history);
+		drugData.setAvailable(available);
+		drugData.setAlsoReported(reported);
+		
+		return drugData;
+	}
+
+	private ISuspectProductDt getSuspectProductValues(HttpServletRequest request) {
+		return null;
+	}
+	
+	private ISuspectMedicalDeviceDt getSuspectMedicalDeviceValues(HttpServletRequest request){
+		return null;
+	}
+	
 	private IDateDt convertStringToDate(String dateStr) throws InvalidDateException{
 		if( dateStr != null ){
 			if( dateStr.contains("/")){

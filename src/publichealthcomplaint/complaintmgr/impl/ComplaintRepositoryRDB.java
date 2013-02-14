@@ -69,7 +69,7 @@ class ComplaintRepositoryRDB {
 
 			// fazer join para acessar as duas tabelas
 			sql = "select * from scbs_queixa q,scbs_queixaalimentar qa where q.codigo=qa.codigo and q."
-				+ "codigo = '" + code + "';";
+					+ "codigo = '" + code + "';";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -105,7 +105,7 @@ class ComplaintRepositoryRDB {
 		{
 			mp.releaseCommunicationChannel();
 		}
-		
+
 		return complaint;
 	}
 
@@ -137,7 +137,7 @@ class ComplaintRepositoryRDB {
 			// queixas, a segunda tabela contem os dados especificos
 			// a complaint animal
 			sql = "select * from scbs_queixa q,scbs_queixaanimal qa where q.codigo=qa.codigo and q."
-				+ "codigo = '" + codigo + "'";
+					+ "codigo = '" + codigo + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -185,7 +185,7 @@ class ComplaintRepositoryRDB {
 		{
 			mp.releaseCommunicationChannel();
 		}
-		
+
 		return complaint;
 	}
 
@@ -201,7 +201,7 @@ class ComplaintRepositoryRDB {
 			IDrugDataDt drugData = new DrugData();
 
 			sql = "select * from scbs_queixa q,scbs_queixamedica qa where q.codigo=qa.code and q."
-				+ "codigo = '" + code + "'";
+					+ "codigo = '" + code + "'";
 			System.out.println("[accessDrug] sql="+sql);
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -223,7 +223,7 @@ class ComplaintRepositoryRDB {
 		{
 			mp.releaseCommunicationChannel();
 		}
-		
+
 		return complaint;
 
 	}
@@ -338,7 +338,7 @@ class ComplaintRepositoryRDB {
 
 			// fazer join para acessar as duas tabelas
 			sql = "select * from scbs_queixa q, scbs_queixadiversa qd where q.codigo=qd.codigo and q."
-				+ "codigo = '" + code + "'";
+					+ "codigo = '" + code + "'";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
 			resultSet = stmt.executeQuery(sql);
@@ -368,7 +368,7 @@ class ComplaintRepositoryRDB {
 		{
 			mp.releaseCommunicationChannel();
 		}
-		
+
 		return complaint;
 	}
 
@@ -382,9 +382,9 @@ class ComplaintRepositoryRDB {
 				Statement stmt = (Statement) this.mp.getCommunicationChannel();
 
 				sql = "update scbs_queixa set " + "observacao='"
-				+ complaint.getObservacao() + "', " + "situacao= '"
-				+ complaint.getSituacao() + "', " + "funcionario= '"
-				+ complaint.getAtendente().getLogin() + "'";
+						+ complaint.getObservacao() + "', " + "situacao= '"
+						+ complaint.getSituacao() + "', " + "funcionario= '"
+						+ complaint.getAtendente().getLogin() + "'";
 
 				if (complaint.getDataParecer() != null) {
 					sql += ", dataparecer= '" + complaint.getDataParecer() + "'";
@@ -520,8 +520,8 @@ class ComplaintRepositoryRDB {
 	}
 
 	private void deepInsertSpecial(ISpecialComplaintDt complaint)
-	throws PersistenceMechanismException, RepositoryException,
-	ObjectAlreadyInsertedException {
+			throws PersistenceMechanismException, RepositoryException,
+			ObjectAlreadyInsertedException {
 		if (complaint.getEnderecoOcorrencia() != null) {
 			try {
 				addressRep.insert(complaint.getEnderecoOcorrencia());
@@ -588,15 +588,15 @@ class ComplaintRepositoryRDB {
 				case Complaint.QUEIXA_ALIMENTAR:
 					IFoodComplaintDt food = (IFoodComplaintDt) complaint;
 					deepInsertFood(food);break;
-				//animal complaint
+					//animal complaint
 				case Complaint.QUEIXA_ANIMAL:
 					IAnimalComplaintDt animal = (IAnimalComplaintDt) complaint;
 					deepInsertAnimal(animal);break;
-				//special complaint
+					//special complaint
 				case Complaint.QUEIXA_DIVERSA:
 					ISpecialComplaintDt special = (ISpecialComplaintDt) complaint;
 					deepInsertSpecial(special); break;
-				//drug complaint
+					//drug complaint
 				case Complaint.QUEIXA_DROGA:
 					IDrugComplaintDt drugComplaint = (IDrugComplaintDt) complaint;
 					deepInsertDrug(drugComplaint); break;
@@ -658,36 +658,41 @@ class ComplaintRepositoryRDB {
 
 	private void insertDrug(IDrugComplaintDt complaint) throws RepositoryException {
 		System.out.println("[ComplaintRepositoryRDB:insertDrug] ");
-		String sql = null;
+		String sql = null; 
+		String commonFields = null;
+		String commonValues = null;
 
-		// Inserir na tabela agora
-		sql = "insert into scbs_queixamedica (code,drugdata,suspectmedicaldevice,suspectproduct) values (";
-		sql += "'" + complaint.getCodigo() + "',";
-
-		//insert drug data
 		IDrugDataDt drugData = complaint.getDrugData();
-		if( drugData != null)
-			sql += "'"+ complaint.getCodigo() + "'";
-		else
-			sql +="NULL";
-		
-		//insert suspect medical device
-		ISuspectMedicalDeviceDt suspectMedicalDevice = complaint.getSuspectMedicalDevice();
-		if( suspectMedicalDevice != null)
-			sql += ",'" + complaint.getCodigo() + "'";
-		else
-			sql +=",NULL";
 
-		//insert suspect product
-		ISuspectProductDt suspectProduct = complaint.getSuspectProduct();
-		if( suspectProduct != null)
-			sql += ",'" + complaint.getCodigo() + "')";
-		else
-			sql +=",NULL)";
 
-		System.out.println("");
-		System.out.println("[ComplaintRepositoryRDB:insertDrug] sql=["+sql+"]");
-		
+		// defining common fields and values
+		commonFields = "insert into scbs_queixamedica (idscbs_queixamedica,typeofproblem,outcomes,dateofevent,tests,history,alsoreported,complainerWeight,gender";
+		commonValues = "values ("+complaint.getCodigo()+","+drugData.getTypeOfProblems()+","+drugData.getOutcomes()
+				+","+drugData.getDateOfEvent()+","+drugData.getTests()+","+drugData.getHistory()+","+drugData.getAlsoReported()+","+complaint.getComplainerWeight()+","+complaint.getGender()+",";
+
+		//if suspect medical device not null, insert data
+		ISuspectMedicalDeviceDt suspectMedDev = complaint.getSuspectMedicalDevice();
+		if (suspectMedDev != null){
+			sql = commonFields + ",model,catalog,brandname,devicename,deviceoperator,lot,manufacturer,othernumber,serial,extrainfo,isreused)" + 
+					commonValues + suspectMedDev.getModel()+","+suspectMedDev.getCatalog()+","+suspectMedDev.getBrandName()+","+suspectMedDev.getDeviceName()+","+suspectMedDev.getDeviceOperator()+","+suspectMedDev.getLot()+","+suspectMedDev.getManufacturer()
+					+","+suspectMedDev.getOtherNumber()+","+suspectMedDev.getSerial()+","+suspectMedDev.getExtraInfo()+","+suspectMedDev.isWasReused()+");";
+
+		}
+		else{
+			//if suspect product not null, insert data
+			ISuspectProductDt suspectProduct = complaint.getSuspectProduct();
+			if(suspectProduct != null){
+				sql = commonFields + ",productname,labelstrenght,dose,frequency,route,startusedate,endusedate,expirationdate,eventreappeared,eventabated)"+
+						commonValues + suspectProduct.getProductName()+","+suspectProduct.getLabelStrength()+","+suspectProduct.getDose()+","+suspectProduct.getFrequency()+","+suspectProduct.getRoute()+","
+						+suspectProduct.getStartUseDate()+","+suspectProduct.getEndUseDate()+","+suspectProduct.getExpirationDate()+","+suspectProduct.getEventReappeared()+","+suspectProduct.getEventAbated()+")";
+
+			}
+		}
+
+
+		// debug
+		System.out.println("[ComplaintRepositoryRDB:insertDrug] final sql=["+sql+"]");
+
 		Statement stmt = (Statement) this.mp.getCommunicationChannel();
 		try {
 			stmt.executeUpdate(sql);
@@ -695,20 +700,11 @@ class ComplaintRepositoryRDB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 	}
 
-	private void insertDrugData(IDrugDataDt drugData){
-		String sql = new String("insert into scbs_drug(code,typeofproblem,outcomes,dateofevent,eventdescription,history,available,reported)" +
-				" values (");
-		String[] listOfProblems = drugData.getTypeOfProblems();
-		for(int i = 0; i < listOfProblems.length; i++){
-			sql = 
-		}
-		 
-	}
-
+	
 	private void insertAnimal(IAnimalComplaintDt complaint) throws RepositoryException {
 		String sql = null;
 		try {
@@ -811,7 +807,7 @@ class ComplaintRepositoryRDB {
 		case Complaint.QUEIXA_ANIMAL:
 			q = accessAnimal(code);
 			break;
-    	case Complaint.QUEIXA_DIVERSA:
+		case Complaint.QUEIXA_DIVERSA:
 			q = accessSpecial(code);
 			break;
 		case Complaint.QUEIXA_DROGA:
