@@ -9,7 +9,7 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 	private static final long serialVersionUID = 1L;
 	private String brandName;
 	private String catalog;
-	private String city;
+	private String manufacturerCity;
 	private String deviceName;
 	private String deviceOperator;
 	private IDateDt expirationDate;
@@ -21,7 +21,7 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 	private String model;
 	private String otherNumber;
 	private String serial;
-	private String state;
+	private String manufacturerState;
 	private String extraInfo;
 	
 	
@@ -36,8 +36,8 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 	}
 
 	
-	public String getCity() {
-		return this.city;
+	public String getManufacturerCity() {
+		return this.manufacturerCity;
 	}
 
 	
@@ -95,8 +95,8 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 		return this.serial;
 	}
 
-	public String getState() {
-		return this.state;
+	public String getManufacturerState() {
+		return this.manufacturerState;
 	}
 
 	
@@ -114,8 +114,8 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 	
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setManufacturerCity(String manufacturerCity) {
+		this.manufacturerCity = manufacturerCity;
 
 	}
 
@@ -178,8 +178,8 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setManufacturerState(String manufacturerState) {
+		this.manufacturerState = manufacturerState;
 
 	}
 

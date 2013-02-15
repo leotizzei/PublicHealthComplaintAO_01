@@ -1,5 +1,6 @@
 package publichealthcomplaint.complaintmgr.impl;
 
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,6 +12,7 @@ import publichealthcomplaint.complaintmgr.spec.prov.IManager;
 import publichealthcomplaint.complaintmgr.spec.req.IDistributionMgt;
 import publichealthcomplaint.complaintmgr.spec.req.IPersistenceMechanism;
 import publichealthcomplaint.datatypes.Complaint;
+import publichealthcomplaint.datatypes.Constants;
 import publichealthcomplaint.datatypes.IAddressDt;
 import publichealthcomplaint.datatypes.IAnimalComplaintDt;
 import publichealthcomplaint.datatypes.IComplaintDt;
@@ -656,46 +658,63 @@ class ComplaintRepositoryRDB {
 		}
 	}
 
+	
+	
 	private void insertDrug(IDrugComplaintDt complaint) throws RepositoryException {
 		System.out.println("[ComplaintRepositoryRDB:insertDrug] ");
-		String sql = null; 
-		String commonFields = null;
-		String commonValues = null;
+		String sqlSuspectProduct = null; 
+		String sqlQueixaMedica = null;
+		String sqlMedicalDevice = null;
 
 		IDrugDataDt drugData = complaint.getDrugData();
-
-
-		// defining common fields and values
-		commonFields = "insert into scbs_queixamedica (idscbs_queixamedica,typeofproblem,outcomes,dateofevent,tests,history,alsoreported,complainerWeight,gender";
-		commonValues = "values ("+complaint.getCodigo()+","+drugData.getTypeOfProblems()+","+drugData.getOutcomes()
-				+","+drugData.getDateOfEvent()+","+drugData.getTests()+","+drugData.getHistory()+","+drugData.getAlsoReported()+","+complaint.getComplainerWeight()+","+complaint.getGender()+",";
-
-		//if suspect medical device not null, insert data
-		ISuspectMedicalDeviceDt suspectMedDev = complaint.getSuspectMedicalDevice();
-		if (suspectMedDev != null){
-			sql = commonFields + ",model,catalog,brandname,devicename,deviceoperator,lot,manufacturer,othernumber,serial,extrainfo,isreused)" + 
-					commonValues + suspectMedDev.getModel()+","+suspectMedDev.getCatalog()+","+suspectMedDev.getBrandName()+","+suspectMedDev.getDeviceName()+","+suspectMedDev.getDeviceOperator()+","+suspectMedDev.getLot()+","+suspectMedDev.getManufacturer()
-					+","+suspectMedDev.getOtherNumber()+","+suspectMedDev.getSerial()+","+suspectMedDev.getExtraInfo()+","+suspectMedDev.isWasReused()+");";
-
-		}
-		else{
-			//if suspect product not null, insert data
-			ISuspectProductDt suspectProduct = complaint.getSuspectProduct();
-			if(suspectProduct != null){
-				sql = commonFields + ",productname,labelstrenght,dose,frequency,route,startusedate,endusedate,expirationdate,eventreappeared,eventabated)"+
-						commonValues + suspectProduct.getProductName()+","+suspectProduct.getLabelStrength()+","+suspectProduct.getDose()+","+suspectProduct.getFrequency()+","+suspectProduct.getRoute()+","
-						+suspectProduct.getStartUseDate()+","+suspectProduct.getEndUseDate()+","+suspectProduct.getExpirationDate()+","+suspectProduct.getEventReappeared()+","+suspectProduct.getEventAbated()+")";
-
-			}
-		}
-
-
-		// debug
-		System.out.println("[ComplaintRepositoryRDB:insertDrug] final sql=["+sql+"]");
+		// need to create the query to insert drug data
 
 		Statement stmt = (Statement) this.mp.getCommunicationChannel();
 		try {
-			stmt.executeUpdate(sql);
+
+			// defining common fields and values
+			sqlQueixaMedica = "insert into "+Constants.DB_NAME+".scbs_queixamedica (code,drugdata,suspectmedicaldevice,suspectproduct) values " +
+					"("+complaint.getCodigo()+","+complaint.getCodigo()+","+complaint.getCodigo()+","+complaint.getCodigo()+");";
+
+			//debug
+			System.out.println("[insertDrug] sqlQueixaMedica=["+sqlQueixaMedica+"]");
+
+			//insert values into scbs_queixamedica table 
+			stmt.executeUpdate(sqlQueixaMedica);
+			
+			//if suspect medical device not null, insert data
+			ISuspectMedicalDeviceDt suspectMedDev = complaint.getSuspectMedicalDevice();
+			if (suspectMedDev != null){
+
+				sqlMedicalDevice = "insert into "+Constants.DB_NAME+".scbs_medicaldevice (brandname,commonname,manufacturer,city,province," +
+						"modelnumber,catalognumber,serial,lotnumber,expirationdate,operatordevice,implanteddate,explanteddate,reuseddevice,reuseddescription,code) values ("+ 
+						suspectMedDev.getBrandName()+","+suspectMedDev.getDeviceName()+","+suspectMedDev.getManufacturer()+","+suspectMedDev.getManufacturerCity()+","
+						+suspectMedDev.getManufacturerState()+","+ suspectMedDev.getModel()+","+suspectMedDev.getCatalog()+","+suspectMedDev.getSerial()+","+
+						suspectMedDev.getLot()+","+suspectMedDev.getExpirationDate()+","+suspectMedDev.getDeviceOperator()+","+suspectMedDev.getImplantedDate()+","+
+						suspectMedDev.getExplantedDate()+","+suspectMedDev.isWasReused()+","+suspectMedDev.getExtraInfo()+","+complaint.getCodigo()+");";
+
+				System.out.println("[insertDrug] sqlMedicalDevice=["+sqlMedicalDevice+"]");
+				
+				//insert values into scbs_medicaldevice table 
+				stmt.executeUpdate(sqlMedicalDevice);
+			}
+			else{
+				//if suspect product not null, insert data
+				ISuspectProductDt suspectProduct = complaint.getSuspectProduct();
+				if(suspectProduct != null){
+					sqlSuspectProduct =  "insert into "+Constants.DB_NAME+".scbs_medicalproduct (productname,labelstrenght,manufacturer,dose,frequency,route,startdate,enddate,eventabated,expirationdate," +
+							"eventreappeared,medicineid,code) values ("+suspectProduct.getProductName()+","+suspectProduct.getLabelStrength()+","+suspectProduct.getManufacturer()+","+suspectProduct.getDose()+","
+							+suspectProduct.getFrequency()+","+suspectProduct.getRoute()+","+suspectProduct.getStartUseDate()+","+suspectProduct.getEndUseDate()+","+suspectProduct.getEventAbated()+","
+							+suspectProduct.getExpirationDate()+","+suspectProduct.getEventReappeared()+","+suspectProduct.getId()+","+complaint.getCodigo()+")";
+
+					System.out.println("[insertDrug] sqlSuspectProduct=["+sqlSuspectProduct+"]");
+					//insert values into scbs_medicalproduct table 
+					stmt.executeUpdate(sqlSuspectProduct);
+				}
+			}
+
+
+		
 			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -704,6 +723,9 @@ class ComplaintRepositoryRDB {
 
 	}
 
+	
+	
+	
 	
 	private void insertAnimal(IAnimalComplaintDt complaint) throws RepositoryException {
 		String sql = null;

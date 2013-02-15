@@ -12,9 +12,9 @@ class SuspectMedicalDevice implements ISuspectMedicalDeviceDt {
 	
 	private String manufacturer;
 	
-	private String city;
+	private String manufacturerCity;
 	
-	private String state;
+	private String manufacturerState;
 	
 	private String model;
 	
@@ -62,20 +62,20 @@ class SuspectMedicalDevice implements ISuspectMedicalDeviceDt {
 		this.manufacturer = manufacturer;
 	}
 
-	public String getCity() {
-		return city;
+	public String getManufacturerCity() {
+		return manufacturerCity;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setManufacturerCity(String city) {
+		this.manufacturerCity = city;
 	}
 
-	public String getState() {
-		return state;
+	public String getManufacturerState() {
+		return manufacturerState;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setManufacturerState(String state) {
+		this.manufacturerState = state;
 	}
 
 	public String getModel() {

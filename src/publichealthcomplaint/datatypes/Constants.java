@@ -13,7 +13,8 @@ public class Constants {
 	//public static final String DB_PASS = "phc1234";
 	
 	//tizzei
-	public static final String DB_URL = "jdbc:mysql://localhost:3306/test";	
+	public static final String DB_NAME = "test";
+	public static final String DB_URL = "jdbc:mysql://localhost:3306/"+DB_NAME;	
 	public static final String DB_LOGIN = "root";	
 	public static final String DB_PASS = "EgdmcT";
 	

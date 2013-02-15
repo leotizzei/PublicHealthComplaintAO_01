@@ -1,8 +1,9 @@
 package publichealthcomplaint.userinterface.impl.generalcomplaint.impl;
 
 import publichealthcomplaint.datatypes.IDateDt;
+import publichealthcomplaint.datatypes.ISuspectProductDt;
 
-class SuspectProduct {
+class SuspectProduct implements ISuspectProductDt{
 	
 	private String productName;
 	

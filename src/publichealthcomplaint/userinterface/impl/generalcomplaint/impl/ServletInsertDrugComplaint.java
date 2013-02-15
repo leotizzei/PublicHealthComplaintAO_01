@@ -66,9 +66,12 @@ public class ServletInsertDrugComplaint extends HttpServlet {
 				generalComplaintMgt.readGeneralComplaintData(request, drugComplaint);
 
 				IDrugDataDt drugData = getDrugDataValues(request);
-				// TODO fazer o mesmo para suspectmedicaldevice and suspectproduct
+				ISuspectProductDt suspectProduct = getSuspectProductValues(request);
+				ISuspectMedicalDeviceDt suspectMedicalDeviceDt = getSuspectMedicalDeviceValues(request);
 
 				drugComplaint.setDrugData(drugData);
+				drugComplaint.setSuspectMedicalDevice(suspectMedicalDeviceDt);
+				drugComplaint.setSuspectProduct(suspectProduct);
 				IComplaintMgt complaint = (IComplaintMgt) mgr.getRequiredInterface("IComplaintMgt");
 				int codigo = complaint.insertComplaint(drugComplaint);
 
@@ -80,10 +83,8 @@ public class ServletInsertDrugComplaint extends HttpServlet {
 		} catch (InvalidDateException e) {
 			e.printStackTrace();
 		} catch (ObjectAlreadyInsertedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ObjectNotValidException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			out.println(htmlPageMgt.close());
@@ -113,18 +114,50 @@ public class ServletInsertDrugComplaint extends HttpServlet {
 		drugData.setHistory(history);
 		drugData.setAvailable(available);
 		drugData.setAlsoReported(reported);
-		
+
 		return drugData;
 	}
 
-	private ISuspectProductDt getSuspectProductValues(HttpServletRequest request) {
-		return null;
+	private ISuspectProductDt getSuspectProductValues(HttpServletRequest request) throws InvalidDateException {
+		ISuspectProductDt suspectProduct = new SuspectProduct();
+		suspectProduct.setProductName(request.getParameter("productName"));
+		suspectProduct.setLabelStrength(request.getParameter("labelStrength"));
+		suspectProduct.setManufacturer(request.getParameter("manufacturer"));
+		suspectProduct.setDose(request.getParameter("dose"));
+		suspectProduct.setFrequency(request.getParameter("frequency"));
+		suspectProduct.setRoute(request.getParameter("route"));
+		suspectProduct.setStartUseDate(this.convertStringToDate(request.getParameter("startDate")));
+		suspectProduct.setEndUseDate(this.convertStringToDate(request.getParameter("endDate")));
+		suspectProduct.setDiagnosis(request.getParameter("diagnosis"));
+		suspectProduct.setEventAbated(request.getParameter("eventAbated"));
+		suspectProduct.setLot(request.getParameter("lot"));
+		suspectProduct.setExpirationDate(this.convertStringToDate(request.getParameter("expirationDate")));
+		suspectProduct.setEventReappeared(request.getParameter("eventReappeared"));
+		suspectProduct.setId(request.getParameter("uniqueID"));
+		return suspectProduct;
 	}
-	
-	private ISuspectMedicalDeviceDt getSuspectMedicalDeviceValues(HttpServletRequest request){
-		return null;
+
+	private ISuspectMedicalDeviceDt getSuspectMedicalDeviceValues(HttpServletRequest request) throws InvalidDateException{
+		ISuspectMedicalDeviceDt suspectMedDevice = new SuspectMedicalDevice();
+		suspectMedDevice.setBrandName(request.getParameter("brandName"));
+		suspectMedDevice.setDeviceName(request.getParameter("commonDeviceName"));
+		suspectMedDevice.setManufacturer(request.getParameter("deviceManufacturer"));
+		suspectMedDevice.setManufacturerCity(request.getParameter("cityManufacture"));
+		suspectMedDevice.setManufacturerState(request.getParameter("stateManufacture"));
+		suspectMedDevice.setModel(request.getParameter("model"));
+		suspectMedDevice.setCatalog(request.getParameter("catalog"));
+		suspectMedDevice.setSerial(request.getParameter("serial"));
+		suspectMedDevice.setLot(request.getParameter("lotDevice"));
+		suspectMedDevice.setExpirationDate(this.convertStringToDate(request.getParameter("deviceExpDate")));
+		suspectMedDevice.setOtherNumber(request.getParameter("otherDeviceNumber"));
+		suspectMedDevice.setDeviceOperator(request.getParameter("operatorDevice"));
+		suspectMedDevice.setImplantedDate(this.convertStringToDate(request.getParameter("implantedDate")));
+		suspectMedDevice.setExplantedDate(this.convertStringToDate(request.getParameter("explantedDate")));
+		suspectMedDevice.setWasReused(this.convertStringToBoolean(request.getParameter("reusedDevice")));
+		suspectMedDevice.setExtraInfo(request.getParameter("reusedDescription"));
+		return suspectMedDevice;
 	}
-	
+
 	private IDateDt convertStringToDate(String dateStr) throws InvalidDateException{
 		if( dateStr != null ){
 			if( dateStr.contains("/")){
@@ -140,4 +173,13 @@ public class ServletInsertDrugComplaint extends HttpServlet {
 			throw new InvalidDateException("Null argument");
 
 	}
+
+	private boolean convertStringToBoolean(String text){
+		if( (text != null) && (text.equalsIgnoreCase("Yes")) )
+			return true;
+		else	
+			return false;
+
+	}
+
 }

@@ -14,13 +14,13 @@ public interface ISuspectMedicalDeviceDt {
 
 	public void setManufacturer(String manufacturer);
 
-	public String getCity();
+	public String getManufacturerCity();
 
-	public void setCity(String city);
+	public void setManufacturerCity(String city);
 
-	public String getState();
+	public String getManufacturerState();
 
-	public void setState(String state) ;
+	public void setManufacturerState(String state) ;
 
 	public String getModel();
 
