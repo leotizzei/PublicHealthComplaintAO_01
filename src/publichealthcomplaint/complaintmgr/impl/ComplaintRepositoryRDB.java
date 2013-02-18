@@ -493,10 +493,10 @@ class ComplaintRepositoryRDB {
 			date = complaint.getDataQueixa();
 			if (complaint.getDataQueixa() != null) {
 				sql += "'" + date.format(1) + "',";
-				System.out.println("[ComplaintRepositoryRDB:deepInsertCommon()] formato da data=1 sql="+sql);
+				
 			} else {
 				sql += "'',";
-				System.out.println("[ComplaintRepositoryRDB:deepInsertCommon()] outro formato da data sql="+sql);
+				
 			}
 
 			if (complaint.getEnderecoSolicitante() != null) {
@@ -507,7 +507,10 @@ class ComplaintRepositoryRDB {
 			sql += ");";
 
 			Statement stmt = (Statement) this.mp.getCommunicationChannel();
-
+			
+			//debug
+			System.out.println("[ComplaintRepositoryRDB:deepInsertCommon()] final sql="+sql);
+			
 			stmt.executeUpdate(sql);
 			stmt.close();
 		} catch (SQLException e) {
@@ -687,11 +690,11 @@ class ComplaintRepositoryRDB {
 			if (suspectMedDev != null){
 
 				sqlMedicalDevice = "insert into "+Constants.DB_NAME+".scbs_medicaldevice (brandname,commonname,manufacturer,city,province," +
-						"modelnumber,catalognumber,serial,lotnumber,expirationdate,operatordevice,implanteddate,explanteddate,reuseddevice,reuseddescription,code) values ("+ 
-						suspectMedDev.getBrandName()+","+suspectMedDev.getDeviceName()+","+suspectMedDev.getManufacturer()+","+suspectMedDev.getManufacturerCity()+","
-						+suspectMedDev.getManufacturerState()+","+ suspectMedDev.getModel()+","+suspectMedDev.getCatalog()+","+suspectMedDev.getSerial()+","+
-						suspectMedDev.getLot()+","+suspectMedDev.getExpirationDate()+","+suspectMedDev.getDeviceOperator()+","+suspectMedDev.getImplantedDate()+","+
-						suspectMedDev.getExplantedDate()+","+suspectMedDev.isWasReused()+","+suspectMedDev.getExtraInfo()+","+complaint.getCodigo()+");";
+						"modelnumber,catalognumber,serial,lotnumber,expirationdate,operatordevice,implanteddate,explanteddate,reuseddevice,reuseddescription,code) values ('"+ 
+						suspectMedDev.getBrandName()+"','"+suspectMedDev.getDeviceName()+"','"+suspectMedDev.getManufacturer()+"','"+suspectMedDev.getManufacturerCity()+"','"
+						+suspectMedDev.getManufacturerState()+"',"+ suspectMedDev.getModel()+","+suspectMedDev.getCatalog()+","+suspectMedDev.getSerial()+","+
+						suspectMedDev.getLot()+","+suspectMedDev.getExpirationDate()+",'"+suspectMedDev.getDeviceOperator()+"',"+suspectMedDev.getImplantedDate()+","+
+						suspectMedDev.getExplantedDate()+",'"+suspectMedDev.isWasReused()+"','"+suspectMedDev.getExtraInfo()+"',"+complaint.getCodigo()+");";
 
 				System.out.println("[insertDrug] sqlMedicalDevice=["+sqlMedicalDevice+"]");
 				
@@ -703,13 +706,16 @@ class ComplaintRepositoryRDB {
 				ISuspectProductDt suspectProduct = complaint.getSuspectProduct();
 				if(suspectProduct != null){
 					sqlSuspectProduct =  "insert into "+Constants.DB_NAME+".scbs_medicalproduct (productname,labelstrenght,manufacturer,dose,frequency,route,startdate,enddate,eventabated,expirationdate," +
-							"eventreappeared,medicineid,code) values ("+suspectProduct.getProductName()+","+suspectProduct.getLabelStrength()+","+suspectProduct.getManufacturer()+","+suspectProduct.getDose()+","
-							+suspectProduct.getFrequency()+","+suspectProduct.getRoute()+","+suspectProduct.getStartUseDate()+","+suspectProduct.getEndUseDate()+","+suspectProduct.getEventAbated()+","
-							+suspectProduct.getExpirationDate()+","+suspectProduct.getEventReappeared()+","+suspectProduct.getId()+","+complaint.getCodigo()+")";
-
+							"eventreappeared,medicineid,code,diagnosis) values ('"+suspectProduct.getProductName()+"','"+suspectProduct.getLabelStrength()+"','"+suspectProduct.getManufacturer()+"','"+suspectProduct.getDose()+"','"
+							+suspectProduct.getFrequency()+"','"+suspectProduct.getRoute()+"',"+suspectProduct.getStartUseDate()+","+suspectProduct.getEndUseDate()+",'"+suspectProduct.getEventAbated()+"',"
+							+suspectProduct.getExpirationDate()+",'"+suspectProduct.getEventReappeared()+"','"+suspectProduct.getId()+"',"+complaint.getCodigo()+",'"+suspectProduct.getDiagnosis()+"')";
+					
 					System.out.println("[insertDrug] sqlSuspectProduct=["+sqlSuspectProduct+"]");
 					//insert values into scbs_medicalproduct table 
 					stmt.executeUpdate(sqlSuspectProduct);
+				}
+				else{
+					System.out.println("[ComplaintRepositoryRDB.insertDrug(..)] Both suspect medical device data and suspect product data are null");
 				}
 			}
 

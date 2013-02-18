@@ -3,12 +3,12 @@ package publichealthcomplaint.complaintmgr.impl;
 import publichealthcomplaint.datatypes.IDateDt;
 import publichealthcomplaint.datatypes.ISuspectMedicalDeviceDt;
 
-class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
+class SuspectMedicalDevice implements ISuspectMedicalDeviceDt {
 	
 	
 	private static final long serialVersionUID = 1L;
 	private String brandName;
-	private String catalog;
+	private int catalog;
 	private String manufacturerCity;
 	private String deviceName;
 	private String deviceOperator;
@@ -16,37 +16,49 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 	private IDateDt explantedDate;
 	private IDateDt implantedDate;
 	private boolean isReused;
-	private String lot;
+	private int lot;
 	private String manufacturer;
-	private String model;
-	private String otherNumber;
-	private String serial;
+	private int model;
+	private int otherNumber;
+	private int serial;
 	private String manufacturerState;
 	private String extraInfo;
 	
 	
 	public String getBrandName() {
-		return this.brandName;
+		if(this.brandName != null &&  this.brandName.equals(""))
+			return null;
+		else
+			return this.brandName;
 	}
 
 	
 	
-	public String getCatalog() {
+	public int getCatalog() {
 		return this.catalog;
 	}
 
 	
 	public String getManufacturerCity() {
-		return this.manufacturerCity;
+		if(this.manufacturerCity != null && this.manufacturerCity.equals(""))
+			return null;
+		else
+			return this.manufacturerCity;
 	}
 
 	
 	public String getDeviceName() {
+		if(this.deviceName != null && this.deviceName.equals(""))
+			return null;
+		else
 		return this.deviceName;
 	}
 
 	
 	public String getDeviceOperator() {
+		if(this.deviceOperator != null && this.deviceOperator.equals(""))
+			return null;
+		else
 		return this.deviceOperator;
 	}
 
@@ -62,6 +74,9 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 
 	
 	public String getExtraInfo() {
+		if(this.extraInfo != null && this.extraInfo.equals(""))
+			return null;
+		else
 		return this.extraInfo;
 	}
 
@@ -73,30 +88,36 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 
 	
 	
-	public String getLot() {
+	public int getLot() {
 		return this.lot;
 	}
 
 	public String getManufacturer() {
-		return this.manufacturer;
+		if( ( this.manufacturer != null ) && ( this.manufacturer.equals("") ) )
+			return null;
+		else
+			return this.manufacturer;
 	}
 
 	
-	public String getModel() {
+	public int getModel() {
 		return this.model;
 	}
 
-	public String getOtherNumber() {
+	public int getOtherNumber() {
 		return this.otherNumber;
 	}
 
 	
-	public String getSerial() {
+	public int getSerial() {
 		return this.serial;
 	}
 
 	public String getManufacturerState() {
-		return this.manufacturerState;
+		if( this.manufacturerState != null && this.manufacturerState.equals(""))
+			return null;
+		else
+			return this.manufacturerState;
 	}
 
 	
@@ -109,7 +130,7 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 
 	}
 
-	public void setCatalog(String catalog) {
+	public void setCatalog(int catalog) {
 		this.catalog = catalog;
 	
 	}
@@ -151,7 +172,7 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 	}
 
 	
-	public void setLot(String lot) {
+	public void setLot(int lot) {
 		this.lot = lot;
 
 	}
@@ -161,19 +182,19 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 	}
 
 	
-	public void setModel(String model) {
+	public void setModel(int model) {
 		this.model = model;
 
 	}
 
 	
-	public void setOtherNumber(String otherNumber) {
+	public void setOtherNumber(int otherNumber) {
 		this.otherNumber = otherNumber;
 
 	}
 
 	
-	public void setSerial(String serial) {
+	public void setSerial(int serial) {
 		this.serial = serial;
 
 	}
@@ -188,5 +209,9 @@ class SuspectMedicalDeviceDt implements ISuspectMedicalDeviceDt {
 		this.isReused = wasReused;
 
 	}
+
+
+
+
 
 }

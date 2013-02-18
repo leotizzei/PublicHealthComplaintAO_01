@@ -22,29 +22,29 @@ public interface ISuspectMedicalDeviceDt {
 
 	public void setManufacturerState(String state) ;
 
-	public String getModel();
+	public int getModel();
 
-	public void setModel(String model) ;
+	public void setModel(int modelNumber) ;
 
-	public String getCatalog();
+	public int getCatalog();
 
-	public void setCatalog(String catalog);
+	public void setCatalog(int catalog);
 
-	public String getSerial();
+	public int getSerial();
 
-	public void setSerial(String serial);
+	public void setSerial(int serial);
 
-	public String getLot() ;
+	public int getLot() ;
 
-	public void setLot(String lot);
+	public void setLot(int lot);
 
 	public IDateDt getExpirationDate() ;
 
 	public void setExpirationDate(IDateDt expirationDate);
 
-	public String getOtherNumber();
+	public int getOtherNumber();
 
-	public void setOtherNumber(String otherNumber);
+	public void setOtherNumber(int otherNumber);
 
 	public String getDeviceOperator() ;
 

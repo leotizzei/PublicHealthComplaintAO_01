@@ -28,7 +28,7 @@ public class HealthWatcherFacade implements IFacade {
 
 
 	public synchronized static HealthWatcherFacade getInstance() {
-	
+
 		if (singleton == null) {
 			singleton = new HealthWatcherFacade();			
 		}
@@ -39,13 +39,13 @@ public class HealthWatcherFacade implements IFacade {
 
 	}
 
-	
+
 
 	public IteratorDsk getComplaintList()  {
 		IManager mgr = ComponentFactory.createInstance();
 		IComplaintMgt complaintMgt = (IComplaintMgt) mgr.getRequiredInterface("IComplaintMgt");
 		return complaintMgt.getComplaintList();
-		
+
 	}
 
 
@@ -56,7 +56,7 @@ public class HealthWatcherFacade implements IFacade {
 		IManager mgr = ComponentFactory.createInstance();                             
 		IDiseaseRepository diseaseRepository = (IDiseaseRepository) mgr.getRequiredInterface("IDiseaseRepository"); 
 		return diseaseRepository.getDiseaseTypeList();
-		
+
 
 	}
 
@@ -64,9 +64,9 @@ public class HealthWatcherFacade implements IFacade {
 	public IteratorDsk getHealthUnitList() {
 		IManager mgr = ComponentFactory.createInstance();
 		IHealthUnitMgt healthUnitMgt = (IHealthUnitMgt) mgr.getRequiredInterface("IHealthUnitMgt");
-		
+
 		return healthUnitMgt.getHealthUnitList();
-	
+
 	}
 
 
@@ -76,7 +76,7 @@ public class HealthWatcherFacade implements IFacade {
 		IHealthUnitRepository healthUnitRepository = (IHealthUnitRepository) mgr.getRequiredInterface("IHealthUnitRepository"); 
 
 		return healthUnitRepository.getPartialHealthUnitList();
-		
+
 
 	}
 
@@ -85,16 +85,12 @@ public class HealthWatcherFacade implements IFacade {
 		System.out.println("[HealthWatcherFacade:getSpecialityList()]");
 		IManager mgr = ComponentFactory.createInstance();
 		ISpecialityRepository specRep = (ISpecialityRepository) mgr.getRequiredInterface("ISpecialityRepository");
-		
-		//try {
-			return specRep.getSpecialityList();
-		/*} catch (ObjectNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;*/
-		
-		
+
+
+		return specRep.getSpecialityList();
+
+
+
 	}
 
 
@@ -103,7 +99,7 @@ public class HealthWatcherFacade implements IFacade {
 		IManager mgr = ComponentFactory.createInstance();
 		IEmployeeMgt employeeMgr = (IEmployeeMgt) mgr.getRequiredInterface("IEmployeeMgt");
 		employeeMgr.insert(e);
-		
+
 
 	}
 
@@ -112,9 +108,9 @@ public class HealthWatcherFacade implements IFacade {
 		System.out.println("[HealthWatcherFacade:insertComplaint()]");
 		IManager mgr = ComponentFactory.createInstance();
 		IComplaintMgt complaintMgt = (IComplaintMgt) mgr.getRequiredInterface("IComplaintMgt");
-		
+
 		return complaintMgt.insertComplaint(complaint);
-		
+
 	}
 
 
@@ -123,7 +119,7 @@ public class HealthWatcherFacade implements IFacade {
 		IManager mgr = ComponentFactory.createInstance();        
 		IComplaintMgt complaintMgt = (IComplaintMgt) mgr.getRequiredInterface("IComplaintMgt");
 		return complaintMgt.search(code);
-		
+
 	}
 
 
@@ -132,9 +128,9 @@ public class HealthWatcherFacade implements IFacade {
 		System.out.println("[HealthWatcherFacade:searchDiseaseType()]");
 		IManager mgr = ComponentFactory.createInstance();                             
 		IDiseaseRepository diseaseRepository = (IDiseaseRepository) mgr.getRequiredInterface("IDiseaseRepository"); 
-		
+
 		return diseaseRepository.search(code);
-		
+
 	}
 
 
@@ -142,9 +138,9 @@ public class HealthWatcherFacade implements IFacade {
 		System.out.println("[HealthWatcherFacade:searchEmployee()] login="+login);
 		IManager mgr = ComponentFactory.createInstance();   
 		IEmployeeMgt employee = (IEmployeeMgt) mgr.getRequiredInterface("IEmployeeMgt");
-		
+
 		return employee.searchEmployee(login);
-		
+
 
 	}
 
@@ -153,9 +149,9 @@ public class HealthWatcherFacade implements IFacade {
 	{
 		IManager mgr = ComponentFactory.createInstance();
 		IHealthUnitMgt healthUnitMgt = (IHealthUnitMgt) mgr.getRequiredInterface("IHealthUnitMgt");
-		
+
 		return healthUnitMgt.searchHealthUnit(healthUnitCode);
-		
+
 	}
 
 
@@ -163,9 +159,9 @@ public class HealthWatcherFacade implements IFacade {
 		System.out.println("[HealthWatcherFacade:searchHealthUnitsBySpeciality()]");
 		IManager mgr = ComponentFactory.createInstance();                             
 		IHealthUnitRepository healthUnitRepository = (IHealthUnitRepository) mgr.getRequiredInterface("IHealthUnitRepository"); 
-		
+
 		return healthUnitRepository.getHealthUnitListBySpeciality(code);
-		
+
 	}
 
 
@@ -173,9 +169,9 @@ public class HealthWatcherFacade implements IFacade {
 		System.out.println("[HealthWatcherFacade:searchSpecialitiesByHealthUnit()]");
 		IManager mgr = ComponentFactory.createInstance();                             
 		IHealthUnitRepository healthUnitRepository = (IHealthUnitRepository) mgr.getRequiredInterface("IHealthUnitRepository"); 
-		
+
 		return healthUnitRepository.searchSpecialitiesByHealthUnit(code);
-		
+
 
 	}
 
@@ -183,9 +179,9 @@ public class HealthWatcherFacade implements IFacade {
 	public void updateComplaint(IComplaintDt complaint){
 		IManager mgr = ComponentFactory.createInstance();
 		IComplaintMgt complaintMgt = (IComplaintMgt) mgr.getRequiredInterface("IComplaintMgt");
-		
+
 		complaintMgt.updateComplaint(complaint);
-		
+
 		System.out.println("[HealthwatcherFacade:updateComplaint() returning...]");
 	}
 
@@ -194,9 +190,9 @@ public class HealthWatcherFacade implements IFacade {
 		System.out.println("[HealthWatcherFacade:insert()]");
 		IManager mgr = ComponentFactory.createInstance();
 		IEmployeeMgt infrastructureMgt = (IEmployeeMgt) mgr.getRequiredInterface("IEmployeeMgt");
-		
+
 		infrastructureMgt.updateEmployee(e);
-		
+
 
 	}
 
@@ -205,17 +201,17 @@ public class HealthWatcherFacade implements IFacade {
 		IManager mgr = ComponentFactory.createInstance();
 		IHealthUnitMgt healthUnitMgt = (IHealthUnitMgt) mgr.getRequiredInterface("IHealthUnitMgt");
 		healthUnitMgt.updateHealthUnit(unit);
-		
+
 
 	}
 
-	
+
 	public File getRSSFile() {
 		IManager mgr = ComponentFactory.createInstance();
 		IRSSFeedsMgt feedsMgr = (IRSSFeedsMgt) mgr.getRequiredInterface("IRSSFeedsMgt");
-		
+
 		return feedsMgr.getRSSFile();
-		
+
 	}
 
 

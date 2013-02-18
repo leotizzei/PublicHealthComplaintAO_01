@@ -2,7 +2,7 @@ PUBLIC HEALTH COMPLAINT (PHC) - SOFTWARE PRODUCT LINE (SPL)
 
 
 ABOUT PHC
-Check the Public Health Complaint SPL website [http://www.ic.unicamp.br/~tizzei/phc/] for more informations about this system.
+Go to Public Health Complaint SPL website [http://www.ic.unicamp.br/~tizzei/phc/] for more informations about this SPL.
 
 
 LICENSE
@@ -14,9 +14,10 @@ INSTALATION
 
 
 EXECUTION
-1) Build the PHCS: <$PHC-HOME> ant build.xml
-2) Execute the Java EE server you like. For instance, if you are using glassfish, run: <$GLASSFISH-HOME>/bin/asadmin start-domain domains/domain1
-3) Execute the RMI registry: <$PHC-HOME/bats/> sh registry.sh
-4) Open the address in your browser (for glassfish): http://localhost:4848/
-5) Deploy the war file generate after the execution of the step 1. Add the path to all libraries separated by comma in the "Libraries" field. Click on "OK".
-6) Click on "launch"
+1) Build the PHC SPL: <$PHC-HOME> ant build.xml
+2) Execute the Java EE server you like. For instance, if you are using glassfish, run: <$GLASSFISH-HOME>./bin/asadmin start-domain domain1
+3) Execute the RMI registry: <$PHC-HOME/bats/>sh registry.sh
+4) Open the PHC database available on <$PHC-HOME/libs> and run MySQL server 
+5) Open the following address in your browser: http://localhost:4848/ (for glassfish)
+6) Deploy the war file generate after the execution of the step 1. Click on "OK".
+7) Click on "launch"
